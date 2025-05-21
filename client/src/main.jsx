@@ -4,7 +4,7 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from '../context/AuthContext.jsx'
-// import { ChatProvider } from '../context/ChatContainer.jsx'
+import { ChatProvider } from '../context/ChatContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter future={{ 
@@ -12,9 +12,9 @@ createRoot(document.getElementById('root')).render(
     v7_startTransition: true 
   }}>
     <AuthProvider>
-      {/* <ChatProvider> */}
+      <ChatProvider>
         <App />
-      {/* </ChatProvider> */}
+      </ChatProvider>
     </AuthProvider>
   </BrowserRouter>,
 )

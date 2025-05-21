@@ -1,10 +1,10 @@
-import { Children, createContext, use, useContext, useEffect, useState } from "react";
+import { children, createContext, use, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext.jsx";
 import toast from "react-hot-toast";
 
 export const ChatContext = createContext();
 
-export const ChatProvider = ({ Children }) => {
+export const ChatProvider = ({ children }) => {
 
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
@@ -62,7 +62,7 @@ export const ChatProvider = ({ Children }) => {
       if(selectedUser && newMessage.senderId === selectedUser._id){
         newMessage.seen = true;
         setMessages((prevMessages) => [...prevMessages, newMessage]);
-        axios.put(`/api/messages/mark/${newMessage._id})`);
+        axios.put(`/api/messages/mark/${newMessage._id}`);
       }else{
         setUnseenMessages((prevUnseenMessages) => ({
             ...prevUnseenMessages , [newMessage.senderId] :
@@ -83,12 +83,12 @@ export const ChatProvider = ({ Children }) => {
     }, [socket, selectedUser])
 
   const value = {
-    messages, users, selectedUser, getUsers, setMessages, sendMessage, setSelectedUser, unseenMessages,setUnseenMessages
+    messages,users, selectedUser, getUsers, getMessages, sendMessage, setSelectedUser, unseenMessages, setUnseenMessages
   }
 
   return (
     <ChatContext.Provider value={value}>
-      { Children }
+      {children}
     </ChatContext.Provider>
   )
 }
